@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Kanban.css";
 
-// source des articles utilisés dans le fichier README.md
+//  source des articles utilisés dans le fichier README.md
 
 export type Task = {
     id: number;
@@ -70,7 +70,8 @@ function Kanban() {
                                     deleteTask(task.id);
                                 }}
                             >
-                                ×
+                             {/* Pour afficher la croix de Multiplication "Win + ." */}
+                                × 
                             </button>
                             <h3 className={`priority-${task.priority}`}>{task.title}</h3>
                             <p className="task-author">Par : {task.author}</p>
