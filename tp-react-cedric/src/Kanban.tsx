@@ -75,6 +75,20 @@ function Kanban() {
                             <h3 className={`priority-${task.priority}`}>{task.title}</h3>
                             <p className="task-author">Par : {task.author}</p>
                             <p>{task.description}</p>
+                            
+                            {/* Ajout des dates */}
+                            <div className="task-dates">
+                                {task.date_start && (
+                                    <p className="task-date">
+                                        <span>Début:</span> {new Date(task.date_start).toLocaleDateString()}
+                                    </p>
+                                )}
+                                {task.date_end && (
+                                    <p className="task-date">
+                                        <span>Fin:</span> {new Date(task.date_end).toLocaleDateString()}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -99,6 +113,20 @@ function Kanban() {
                             <h3 className={`priority-${task.priority}`}>{task.title}</h3>
                             <p className="task-author">Par : {task.author}</p>
                             <p>{task.description}</p>
+                            
+                            {/* Ajout des dates */}
+                            <div className="task-dates">
+                                {task.date_start && (
+                                    <p className="task-date">
+                                        <span>Début:</span> {new Date(task.date_start).toLocaleDateString()}
+                                    </p>
+                                )}
+                                {task.date_end && (
+                                    <p className="task-date">
+                                        <span>Fin:</span> {new Date(task.date_end).toLocaleDateString()}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -123,6 +151,20 @@ function Kanban() {
                             <h3 className={`priority-${task.priority}`}>{task.title}</h3>
                             <p className="task-author">Par : {task.author}</p>
                             <p>{task.description}</p>
+                            
+                            {/* Ajout des dates */}
+                            <div className="task-dates">
+                                {task.date_start && (
+                                    <p className="task-date">
+                                        <span>Début:</span> {new Date(task.date_start).toLocaleDateString()}
+                                    </p>
+                                )}
+                                {task.date_end && (
+                                    <p className="task-date">
+                                        <span>Fin:</span> {new Date(task.date_end).toLocaleDateString()}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>

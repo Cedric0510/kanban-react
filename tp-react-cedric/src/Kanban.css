@@ -300,3 +300,28 @@ button:active {
   background-color: #ff5252;
   color: white;
 }
+
+/* Style pour les dates */
+.task-dates {
+  margin-top: 10px;
+  border-top: 1px dashed #eee;
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.task-date span {
+  font-weight: 600;
+  color: #555;
+  margin-right: 4px;
+}
+
+/* En responsive, ajuster l'affichage des dates */
+@media (max-width: 480px) {
+  .task-dates {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
