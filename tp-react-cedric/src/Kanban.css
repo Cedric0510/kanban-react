@@ -1,0 +1,302 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  width: 100%;
+}
+
+/* Nouvelle approche de centrage */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 300px); /* Trois colonnes de largeur fixe */
+  gap: 20px;
+  justify-content: center; /* Centre les colonnes horizontalement */
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px 0;
+}
+
+.column {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  height: 100%; /* Assure que toutes les colonnes ont la même hauteur */
+}
+
+.column:nth-child(1) h2 {
+  color: #e74c3c; 
+}
+
+.column:nth-child(2) h2 {
+  color: #f39c12;
+}
+
+.column:nth-child(3) h2 {
+  color: #27ae60;
+}
+
+.column h2 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+}
+
+.task {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: grab;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.task:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.task p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.task:active {
+  cursor: grabbing;
+  opacity: 0.8;
+}
+
+/* Style du bouton d'ajout de tâches */
+button {
+  background-color: #3498db; /* Bleu qui complète les autres couleurs */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  background-color: #2980b9; /* Bleu plus foncé au survol */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+  background-color: #1f618d; /* Encore plus foncé quand cliqué */
+}
+
+/* Style du formulaire compact */
+.task-form-container {
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.task-form-container h2 {
+  text-align: center;
+  color: #3498db;
+  margin: 0 0 12px 0;
+  font-size: 1.2rem;
+}
+
+/* Organisation du formulaire en deux colonnes */
+.task-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; /* Augmentation du gap entre les colonnes */
+  padding: 5px; /* Petit padding intérieur pour éviter que le contenu ne touche les bords */
+}
+
+/* Titre et description prennent toute la largeur */
+.form-group:nth-child(1), 
+.form-group:nth-child(4) {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  margin-bottom: 0;
+  box-sizing: border-box; /* S'assure que le padding est inclus dans la largeur */
+  overflow: hidden; /* Empêche le débordement du contenu */
+}
+
+.task-form label {
+  display: block;
+  margin-bottom: 5px; /* Un peu plus d'espace sous les labels */
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  white-space: nowrap; /* Empêche les labels de se wrapper */
+}
+
+.task-form input[type="text"],
+.task-form input[type="date"],
+.task-form select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  height: 32px;
+  box-sizing: border-box; /* S'assure que le padding est inclus dans la largeur */
+}
+
+/* Bouton de soumission */
+.task-form button[type="submit"] {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  padding: 8px;
+  font-size: 0.95rem;
+}
+
+/* Style du modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: auto; /* Adapte la largeur au contenu */
+  height: auto; /* Adapte la hauteur au contenu */
+  padding: 0;
+  animation: fadeIn 0.3s;
+}
+
+.task-form input[type="submit"] {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: all 0.3s ease;
+}
+
+.task-form input[type="submit"]:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.task-form input[type="submit"]:active {
+  transform: translateY(0);
+  background-color: #1f618d;
+}
+
+/* Style des instructions */
+.instructions {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  grid-column: 1 / -1; /* Assure que les instructions prennent toute la largeur */
+  padding: 12px 20px;
+  background-color: transparent; /* Suppression du fond */
+  border-left: none; /* Suppression de la bordure gauche */
+  border-radius: 0;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.instructions h3 {
+  font-size: 1.1rem;
+  color: #3498db; /* Couleur bleue pour meilleure visibilité sans fond */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.instructions h3::before {
+  content: "↔️";
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Couleurs des titres selon la priorité */
+.priority-low {
+  color: #27ae60; /* Vert pour priorité faible */
+}
+
+.priority-medium {
+  color: #f39c12; /* Orange pour priorité moyenne */
+}
+
+.priority-high {
+  color: #e74c3c; /* Rouge pour priorité haute */
+}
+
+/* Style pour le bouton de suppression */
+.delete-task-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  color: #777;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.delete-task-btn:hover {
+  background-color: #ff5252;
+  color: white;
+}
